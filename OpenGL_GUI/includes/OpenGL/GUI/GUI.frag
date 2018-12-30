@@ -28,6 +28,10 @@ uniform float aspectRatio;
 uniform float boxAspectRatio;
 uniform float sliderVal;
 uniform int side;
+uniform vec3 textCol;
+uniform vec3 activeCol;
+uniform vec3 backgroundCol;
+uniform float alphaVal;
 
 void main() {
 	// set up variables
@@ -60,14 +64,14 @@ void main() {
 	//calc color
 	vec3 col = vec3(0.0);
 	float sv = (uv.x < sliderVal)? 1.0 : 0.0;
-	col = vec3(1.0,0.0,0.0)*sv;
+	col = activeCol*sv;
 
 	float val = smoothstep(0.01,0.0,t);    
-    col = mix(col, vec3(1.0), val);
+    col = mix(col, textCol, val);
 
-	if(sdBox(uv - vec2(0.5), boarder*0.5) > 0.0)col = vec3(0.0, 0.0, 1.0);
+	if(sdBox(uv - vec2(0.5), boarder*0.5) > 0.0)col = backgroundCol;
 
 	//if(uv.y > 0.49 && uv.y < 0.51)col = vec3(1.0,0.0,0.0);
 
-	FragColor = vec4(col, 1.0);
+	FragColor = vec4(col, alphaVal);
 }

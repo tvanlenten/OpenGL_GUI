@@ -22,27 +22,36 @@ enum elementType {
 	GUI_BUTTON
 };
 
+enum textSide {
+	LEFT_SIDE,
+	CENTER_SIDE,
+	RIGHT_SIDE
+};
+
 struct GUIelement {
 	elementType type;
 	char* string;
-	int stringSize;
+	double charSize;
 	double* data;
 	double min;
 	double max;
 	int side;
+	glm::vec3 textCol;
+	glm::vec3 activeCol;
 };
 
 
 class GUI {
 public:
-	GUI(int screen_width, int screen_height, double element_width, double element_height);
+	GUI(int screen_width, int screen_height, double element_width, double element_height, glm::vec3 backgroundCol, double transparency);
 	void draw(glm::vec2 pos);
-	void update(glm::vec2 mouse, bool mouseDown);
+	void update(glm::vec2 pos, glm::vec2 mouse, bool mouseDown);
 	void show(bool state);
 
-	void addText(char* str, int stringSize);
-	void addSlider(double* data, double min, double max);
-	void addButton(char* str, int stringSize, double* data);
+	void addText(char* str, double charSize, int side, glm::vec3 textCol);
+	void addText(char* str, double charSize, int side, glm::vec3 textCol, glm::vec3 activeCol);
+	void addSlider(char* str, double charSize, double* data, double min, double max, int side, glm::vec3 textCol, glm::vec3 sliderCol);
+	void addButton(char* str, double charSize, double* data, int side, glm::vec3 textCol, glm::vec3 buttonCol);
 	void removeAt(int index);
 	void remeveAll();
 	~GUI();
@@ -52,6 +61,9 @@ private:
 	double element_width;
 	double element_height;
 	double element_aspectRatio;
+	bool mouseAlreadyDown;
+	glm::vec3 backgroundCol;
+	double transparency;
 	std::vector<GUIelement> elements;
 	Buffer buffer{ GL_SHADER_STORAGE_BUFFER, 256 * sizeof(GLfloat), nullptr, GL_STREAM_DRAW };
 	Texture font{ "includes/OpenGL/GUI/fontSDF.png", GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, true };
