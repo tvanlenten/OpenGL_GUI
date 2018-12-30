@@ -113,6 +113,7 @@ void GUI::update(glm::vec2 pos, glm::vec2 mouse, bool mouseDown) {
 	if (mouseDown)mouseAlreadyDown = true;
 }
 
+
 void GUI::show(bool state) {
 	isShow = state;
 }
