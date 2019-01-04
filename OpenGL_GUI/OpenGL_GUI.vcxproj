@@ -127,13 +127,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="includes\main.cpp" />
+    <ClCompile Include="includes\OpenGL\Buffer.cpp" />
     <ClCompile Include="includes\OpenGL\Camera.cpp" />
     <ClCompile Include="includes\OpenGL\Control.cpp" />
+    <ClCompile Include="includes\OpenGL\FrameBuffer.cpp" />
     <ClCompile Include="includes\OpenGL\GUI\GUI.cpp" />
+    <ClCompile Include="includes\OpenGL\Mesh.cpp" />
+    <ClCompile Include="includes\OpenGL\Shader.cpp" />
+    <ClCompile Include="includes\OpenGL\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="includes\OpenGL\GUI\GUI.frag" />
     <None Include="includes\OpenGL\GUI\GUI.vert" />
+    <None Include="shaders\basic.frag" />
+    <None Include="shaders\basic.vert" />
     <None Include="shaders\test2D.frag" />
     <None Include="shaders\test2D.vert" />
   </ItemGroup>

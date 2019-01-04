@@ -9,23 +9,14 @@
 
 class Buffer {
 public:
-	Buffer(GLenum buffer_type, unsigned int dataSize, GLvoid* data, GLenum memoryType) {
-		bufferType = buffer_type;
-		glGenBuffers(1, &ID);
-		glBindBuffer(bufferType, ID);
-		glBufferData(bufferType, dataSize, data, memoryType);
-		glBindBuffer(bufferType, 0);
-	}
-	void update(int offset, int size, GLvoid* data) {
-		glBindBuffer(bufferType, ID);
-		glBufferSubData(bufferType, offset, size, data);
-		glBindBuffer(bufferType, 0);
-	}
-	void bind() { glBindBuffer(bufferType, ID); }
-	void bindTo(int base) { glBindBufferBase(bufferType, base, ID); }
-	void unbind() { glBindBuffer(bufferType, 0); }
-	~Buffer() { glDeleteBuffers(1, &ID); }
+	Buffer(GLenum buffer_type, unsigned int dataSize, GLvoid* data, GLenum memoryType);
 
+	void update(int offset, int size, GLvoid* data);
+	void bind();
+	void bindTo(int base);
+	void unbind();
+
+	~Buffer();
 private:
 	GLuint ID;
 	GLenum bufferType;

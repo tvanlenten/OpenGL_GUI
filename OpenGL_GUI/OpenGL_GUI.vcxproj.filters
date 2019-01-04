@@ -53,12 +53,29 @@
     <ClCompile Include="includes\OpenGL\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="includes\OpenGL\Buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="includes\OpenGL\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="includes\OpenGL\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="includes\OpenGL\FrameBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="includes\OpenGL\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\test2D.frag" />
     <None Include="shaders\test2D.vert" />
     <None Include="includes\OpenGL\GUI\GUI.vert" />
     <None Include="includes\OpenGL\GUI\GUI.frag" />
+    <None Include="shaders\basic.vert" />
+    <None Include="shaders\basic.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="includes\OpenGL\GUI\fontSDF.png">

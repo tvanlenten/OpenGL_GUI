@@ -10,73 +10,57 @@
 #include "GUI/GUI.h"
 
 /*
-	TODO FIX THIS HEADER!
-*/
-
-
-/*
 	By Tyler Van Lenten
-	please note that many aspects of this program were taken from various openGL tutorials
-	this is my attempt to organize openGL for my purposes and likely will not be useful for much else
-	last updated: 12/03/17
+	This is a basic OpenGL and GLEW framework.  It is mainly tailored for
+	Volume rendering and Ray Casting.  It has support for simple meshes and all
+	GLSL shader types including Vertex, Fragment, Gemotry, and Compute shaders.
+	It also has easy to create and use Buffers, Textures, and FrameBuffers.
 
-	has nearly all basic openGL support including
+	A simple GUI is also included which supports Sliders, Text, and Buttons.
+	last updated: 1/04/19
+
+	Things Supported
 	-FBOs(FrameBuffers)
 	-buffers of all types
 	-Mesh(VAO w/ extra features)
-	-Text(simple SD field text that is uniformly spaced)
-	-support for all 4 types of shaders
+	-GUI(simple GUI with Sliders, Text, and Buttons)
+	-support for all 4 types of shaders(Vertex, Fragment, Gemotry, and Compute)
 	-Has a standard 3D camera that can also be used for ray casting
-	-Also has support for keyboard, mouse movement, and mouse scroll
+	-Also has support for keyboard, mouse movement, mouse buttons, and mouse scroll
 
 	TO DO:
-	-FIX header files are used incorectly!
-	header files must not include definitions just declorations
-
 	-Textures report if loading failed
 	-Textures auto flip
-
+	-GLFW multi window support
+	-Buffer maps and ranges
+	-Objects (Mesh, Shaders, Textures, and Buffers combined with a init(), update(), and draw() method)
 */
-
 
 //EXAMPLE PROGRAM//
 /*
 	#include "OpenGL\OpenGL.h"
-	#include <iostream>
-
-	#define width 1280
-	#define height 720
+	#define width 1920
+	#define height 1080
 
 	int main() {
-		Control control(width, height, "OpenGL Example", false);
-		Camera camera(width, height, glm::vec3(-2.0f, 1.0f, -2.0f), 90.0f, 0.1f, 100.0f, 0.1f, 0.1f);
-		FrameBuffer screen(width,height);
-		Text text(width, height);
-
-
+		Control control(width, height, "OpenGL Example", true);
+		FrameBuffer screen(width, height);
+		Camera camera(width, height, glm::vec3(-0.1f, 1.0f, -0.1f), 90.0f, 0.1f, 100.0f, 0.1f, 0.1f);
+		Shader shader("shaders/test.vert", "shaders/test.frag", nullptr, false);
+	
 		Mesh rect;
 		rect.createRect2D();
-		Shader shader("shaders/texture2D.vt", "shaders/texture2D.frag", nullptr, false);
-		Texture tex("textures/test.png", GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, true);
-		shader.setInt("text", 0);
 
-		//control.depthTest(true);
-		//control.cull(GL_BACK);
-		//control.wireframe(true);
-
+		control.cull(GL_FRONT);
+		control.depthTest(true);
+		control.showMouse();
 		while (!control.shouldQuit()) {
 			control.update();
-			camera.update();
-
+			camera.update(&control);
+		
 			screen.use();
 			screen.clear();
-
-			shader.use();
-			tex.use(0);
 			rect.draw();
-
-			std::string example = "OpenGL Example";
-			text.draw(example.c_str(), example.length(), glm::vec2(0.0,0.0), 0.1, 0.5, glm::vec3(1.0,0.0,0.0));
 
 			control.swapBuffers();
 		}
