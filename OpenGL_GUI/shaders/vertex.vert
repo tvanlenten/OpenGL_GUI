@@ -7,7 +7,9 @@ out vec2 uv;
 uniform mat4 proj;
 uniform mat4 view;
 
+uniform float scale;
+
 void main() {
 	uv = texCoords;
-    gl_Position = proj * view * vec4(position, 1.0); 
+    gl_Position = proj * view * vec4(position*scale, 1.0); 
 } 

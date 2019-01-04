@@ -18,31 +18,13 @@
     <ClInclude Include="includes\OpenGL\Buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes\OpenGL\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\OpenGL\Control.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="includes\OpenGL\FrameBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\OpenGL\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\OpenGL\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes\OpenGL\OpenGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="includes\OpenGL\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\OpenGL\Slider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\OpenGL\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\OpenGL\Texture.h">
@@ -51,12 +33,24 @@
     <ClInclude Include="includes\OpenGL\GUI\GUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="includes\OpenGL\Control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\OpenGL\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="includes\draw.cpp">
+    <ClCompile Include="includes\OpenGL\GUI\GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="includes\OpenGL\GUI\GUI.cpp">
+    <ClCompile Include="includes\OpenGL\Control.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="includes\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="includes\OpenGL\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

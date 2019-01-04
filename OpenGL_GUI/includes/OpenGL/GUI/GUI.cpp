@@ -1,6 +1,5 @@
 #include "GUI.h"
 
-
 GUI::GUI(int screen_width, int screen_height, double element_width, double element_height, glm::vec3 backgroundCol, double transparency) {
 	this->aspectRatio = double(screen_height) / double(screen_width);
 	this->element_width = element_width;
@@ -8,6 +7,7 @@ GUI::GUI(int screen_width, int screen_height, double element_width, double eleme
 	this->element_aspectRatio = element_width / element_height;
 	this->backgroundCol = backgroundCol;
 	this->transparency = transparency;
+	position = glm::vec2(0.0);
 
 	GLfloat textVerts[] = {
 		1.0f, 0.0f,  1.0f, 0.0f,
@@ -40,7 +40,7 @@ GUI::GUI(int screen_width, int screen_height, double element_width, double eleme
 	mesh.unbind();
 }
 
-void GUI::draw(glm::vec2 pos) {
+void GUI::draw() {
 	float data[256];
 	shader.use();
 	shader.setVec2("scale", glm::vec2(element_width, element_height));
@@ -66,7 +66,7 @@ void GUI::draw(glm::vec2 pos) {
 		}
 		buffer.update(0, 256, data);
 
-		glm::vec2 p = pos + glm::vec2(0.0, py);
+		glm::vec2 p = position + glm::vec2(0.0, py);
 
 		double sliderVal = 0.0;
 		if (element.data) {
@@ -88,16 +88,16 @@ void GUI::draw(glm::vec2 pos) {
 	}
 }
 
-void GUI::update(glm::vec2 pos, glm::vec2 mouse, bool mouseDown) {
+void GUI::update(glm::vec4 mouse, bool mouseDown) {
 	if(!mouseDown)mouseAlreadyDown = false;
 
 	double py = 0.0;
 	int i = 0;
 	for (int i = 0; i < elements.size(); i++) {
-		if (mouseDown && mouse.y > pos.y + element_height*i && mouse.y < pos.y + element_height*(i + 1)
-				&& mouse.x > pos.x && mouse.x < pos.x + element_width) {
+		if (mouseDown && mouse.y > position.y + element_height*i && mouse.y < position.y + element_height*(i + 1)
+				&& mouse.x > position.x && mouse.x < position.x + element_width) {
 			if (elements[i].type == GUI_SLIDER) {
-				double val = (mouse.x - pos.x) / element_width;
+				double val = (mouse.x - position.x) / element_width;
 				val = glm::clamp(val, 0.0, 1.0);
 				val = elements[i].min + val*(elements[i].max - elements[i].min);
 				*elements[i].data = val;
@@ -111,10 +111,6 @@ void GUI::update(glm::vec2 pos, glm::vec2 mouse, bool mouseDown) {
 	}
 
 	if (mouseDown)mouseAlreadyDown = true;
-}
-
-void GUI::show(bool state) {
-	isShow = state;
 }
 
 void GUI::addText(char* str, double charSize, int side, glm::vec3 textCol) {
@@ -173,6 +169,12 @@ void GUI::addButton(char* str, double charSize, double* data, int side, glm::vec
 	elements.push_back(element);
 }
 
+bool GUI::insideGUI(glm::vec2 p) {
+	glm::vec2 a = position;
+	glm::vec2 b = position + glm::vec2(element_width, element_height * elements.size());
+	return (p.x > a.x && p.x < b.x && p.y > a.y && p.y < b.y);
+}
+
 void GUI::removeAt(int index) {
 	elements.erase(elements.begin() + index);
 }
@@ -181,6 +183,24 @@ void GUI::remeveAll() {
 	elements.clear();
 }
 
+void GUI::setPosition(glm::vec2 position) {
+	this->position = position;
+}
+
+void GUI::setSize(glm::vec2 size) {
+	this->element_width = size.x;
+	this->element_height = size.y;
+}
+
+void GUI::setBackgroundColor(glm::vec3 color) {
+	this->backgroundCol = color;
+}
+
+void GUI::setTransparency(double transparancy) {
+	this->transparency = transparancy;
+}
+
 GUI::~GUI() {
 	elements.clear();
 }
+

@@ -116,22 +116,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="includes\OpenGL\GUI\GUI.h" />
-    <ClInclude Include="includes\OpenGL\Buffer.h" />
     <ClInclude Include="includes\OpenGL\Camera.h" />
     <ClInclude Include="includes\OpenGL\Control.h" />
+    <ClInclude Include="includes\OpenGL\GUI\GUI.h" />
+    <ClInclude Include="includes\OpenGL\Buffer.h" />
     <ClInclude Include="includes\OpenGL\FrameBuffer.h" />
-    <ClInclude Include="includes\OpenGL\Input.h" />
     <ClInclude Include="includes\OpenGL\Mesh.h" />
-    <ClInclude Include="includes\OpenGL\OpenGL.h" />
     <ClInclude Include="includes\OpenGL\Shader.h" />
-    <ClInclude Include="includes\OpenGL\Slider.h" />
-    <ClInclude Include="includes\OpenGL\Text.h" />
     <ClInclude Include="includes\OpenGL\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="includes\main.cpp" />
+    <ClCompile Include="includes\OpenGL\Camera.cpp" />
+    <ClCompile Include="includes\OpenGL\Control.cpp" />
     <ClCompile Include="includes\OpenGL\GUI\GUI.cpp" />
-    <ClCompile Include="includes\draw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="includes\OpenGL\GUI\GUI.frag" />

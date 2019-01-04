@@ -7,9 +7,12 @@
 #include "Buffer.h"
 #include "Shader.h"
 #include "FrameBuffer.h"
-#include "Text.h"
-#include "Slider.h"
 #include "GUI/GUI.h"
+
+/*
+	TODO FIX THIS HEADER!
+*/
+
 
 /*
 	By Tyler Van Lenten
@@ -32,6 +35,7 @@
 
 	-Textures report if loading failed
 	-Textures auto flip
+
 */
 
 

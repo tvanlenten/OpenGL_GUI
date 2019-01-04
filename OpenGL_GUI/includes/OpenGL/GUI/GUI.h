@@ -23,9 +23,9 @@ enum elementType {
 };
 
 enum textSide {
-	LEFT_SIDE,
-	CENTER_SIDE,
-	RIGHT_SIDE
+	GUI_LEFT_SIDE,
+	GUI_CENTER_SIDE,
+	GUI_RIGHT_SIDE
 };
 
 struct GUIelement {
@@ -44,24 +44,40 @@ struct GUIelement {
 class GUI {
 public:
 	GUI(int screen_width, int screen_height, double element_width, double element_height, glm::vec3 backgroundCol, double transparency);
-	void draw(glm::vec2 pos);
-	void update(glm::vec2 pos, glm::vec2 mouse, bool mouseDown);
-	void show(bool state);
+	void draw();
+	void update(glm::vec4 mouse, bool mouseDown);
 
+	/*
+		adds a text element with the default background color
+	*/
 	void addText(char* str, double charSize, int side, glm::vec3 textCol);
+
+	/*
+		adds a text element with the specified background color
+	*/
 	void addText(char* str, double charSize, int side, glm::vec3 textCol, glm::vec3 activeCol);
+	
 	void addSlider(char* str, double charSize, double* data, double min, double max, int side, glm::vec3 textCol, glm::vec3 sliderCol);
 	void addButton(char* str, double charSize, double* data, int side, glm::vec3 textCol, glm::vec3 buttonCol);
 	void removeAt(int index);
 	void remeveAll();
+
+	bool insideGUI(glm::vec2 p);
+
+	void setPosition(glm::vec2 position);
+	void setSize(glm::vec2 size);
+	void setBackgroundColor(glm::vec3 color);
+	void setTransparency(double transparancy);
+
+
 	~GUI();
 private:
-	bool isShow;
 	double aspectRatio;
 	double element_width;
 	double element_height;
 	double element_aspectRatio;
 	bool mouseAlreadyDown;
+	glm::vec2 position;
 	glm::vec3 backgroundCol;
 	double transparency;
 	std::vector<GUIelement> elements;
